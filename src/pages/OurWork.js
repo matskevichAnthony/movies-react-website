@@ -6,17 +6,25 @@ import athlete from '../img/athlete-small.png';
 import theracer from '../img/theracer-small.png';
 import goodtimes from '../img/goodtimes-small.png';
 
-import { pageAnimation } from '../animation';
+import { pageAnimation, fade, photoAnim, lineAnim, slider, sliderContainer } from '../animation';
 import { motion } from 'framer-motion';
 
 const OurWork = () => {
     return (
         <Work style={{ background: "#fff" }} exit="exit" variants={pageAnimation} initial="hidden" animate="show">
+            <motion.div variants={sliderContainer}>
+                <Frame1 variants={slider}></Frame1>
+                <Frame2 variants={slider}></Frame2>
+                <Frame3 variants={slider}></Frame3>
+                <Frame4 variants={slider}></Frame4>
+            </motion.div>
             <Movie>
-                <h2>The athlete</h2>
-                <div className="line"></div>
+                <motion.h2 variants={fade}>The athlete</motion.h2>
+                <motion.div variants={lineAnim} className="line"></motion.div>
                 <Link to="/work/the-athlete">
-                    <img src={athlete} alt="athlete" />
+                    <Hide>
+                        <motion.img variants={photoAnim} src={athlete} alt="athlete" />
+                    </Hide>
                 </Link>
             </Movie>
             <Movie>
@@ -37,6 +45,32 @@ const OurWork = () => {
     )
 }
 
+//frame anim
+
+const Frame1 = styled(motion.div)`
+position: fixed;
+left: 0;
+top: 10%;
+width: 100%;
+height: 100vh;
+background: #fffebf;
+z-index: 2;
+`
+
+const Frame2 = styled(Frame1)`
+background: #ff8efb;
+`
+
+const Frame3 = styled(Frame1)`
+background: #8ed2ff;
+`
+
+const Frame4 = styled(Frame1)`
+background: #8effa0;
+`
+
+//
+
 const Work = styled(motion.div)`
 min-height: 100vh;
 overflow: hidden;
@@ -46,11 +80,15 @@ h2{
 }
 `;
 
+const Hide = styled.div`
+overflow: hidden;
+`;
+
 const Movie = styled.div`
 padding-bottom: 10rem;
 .line{
     height: 0.5rem;
-    background-color: #cccccc;
+    background-color: #23d997;
     margin-bottom: 3rem;
 }
 img{
