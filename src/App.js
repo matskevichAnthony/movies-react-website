@@ -9,7 +9,6 @@ import Nav from './components/Nav';
 import ContactUs from './pages/ContactUs';
 import OurWork from './pages/OurWork';
 import MovieDetail from './pages/MovieDetail';
-
 //animation
 import { AnimatePresence } from 'framer-motion';
 

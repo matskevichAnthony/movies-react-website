@@ -2,22 +2,27 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { About } from '../styles';
 import Toggle from './Toggle';
-import { AnimateSharedLayout } from 'framer-motion';
+import { motion, AnimateSharedLayout } from 'framer-motion';
+import { useScroll } from './useScroll';
+import { scrollReveal } from '../animation';
 
 const FaqSection = () => {
+    const [element, controls] = useScroll();
     return (
-        <Faq>
+        <Faq variants={scrollReveal} animate={controls} initial="hidden" ref={element}>
             <h2>Any questions <span>FAQ</span></h2>
             <AnimateSharedLayout >
                 <Toggle title="How do i start?">
-                    <div className="question">
+                    <motion.div className="question" layout initial={{ opacity: 0 }}
+                        animate={{ opacity: 1, transition: { duration: 1 } }}
+                        exit={{ opacity: 0 }}>
                         <div className="answer">
                             <p>lorem ipsum dolor sit amet</p>
                             <p>
                                 lorem dolor sit amet kitar ligot xersd adipiscing, neque
                             </p>
                         </div>
-                    </div>
+                    </motion.div>
                 </Toggle>
                 <Toggle title="Daily schedule">
                     <div className="question">
@@ -56,6 +61,7 @@ const FaqSection = () => {
 
 const Faq = styled(About)`
     display:block;
+    overflow: hidden;
     span{
         display:block;
     }
